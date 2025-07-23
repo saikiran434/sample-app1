@@ -15,16 +15,16 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: registry.access.redhat.com/ubi9/nginx-122
-        ports:
-        - containerPort: 80
-        volumeMounts:
-          - name: nginx-cache
-            mountPath: /var/cache/nginx
-    volumes:
-      - name: nginx-cache
-        emptyDir: {}
+        - name: nginx
+          image: registry.access.redhat.com/ubi9/nginx-122
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
