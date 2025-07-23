@@ -14,9 +14,6 @@ spec:
       labels:
         app: nginx
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
       containers:
         - name: nginx-container
           image: registry.access.redhat.com/ubi9/nginx-122
@@ -28,6 +25,7 @@ spec:
       volumes:
         - name: nginx-cache
           emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
