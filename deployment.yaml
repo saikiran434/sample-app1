@@ -1,37 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpd-deployment
-  labels:
-    app: httpd
+  name: guestbook-ui
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: httpd
+      app: guestbook-ui
   template:
     metadata:
       labels:
-        app: httpd
+        app: guestbook-ui
     spec:
       containers:
-        - name: httpd
-          image: httpd:2.4
+        - image: gcr.io/google-samples/gb-frontend:v5
+          name: guestbook-ui
           ports:
             - containerPort: 8080
-          command: ["/bin/sh", "-c"]
-          args:
-            - sed -i 's/Listen 80/Listen 8080/' /usr/local/apache2/conf/httpd.conf && httpd-foreground
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: httpd-service
-spec:
-  selector:
-    app: httpd
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
